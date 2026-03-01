@@ -1,0 +1,11 @@
+Dear Customer,
+
+Your PayPal account has been suspended due to suspicious activity. 
+Please verify your identity immediately by clicking the link below 
+and entering your password and credit card information.
+
+Click here: http://paypa1-secure-login.com/verify
+
+If you do not respond within 24 hours, your account will be permanently locked.
+
+PayPal Security Team
