@@ -5,7 +5,9 @@ Uses rule-based checks, text analysis, and optional ML model.
 """
 
 import re
-from typing import Dict, Tuple, Optional
+import requests
+from typing import Dict, Tuple, Optional, List
+from urllib.parse import urlparse
 
 print("Initializing Phishing Detection System...")
 
@@ -40,6 +42,90 @@ PHISHING_RULES = {
     # 'urgency_financial': r'(?i)(account|payment).{0,30}(suspend|expir|lock)',
     # 'prize_scam': r'(?i)(won|winner|prize).{0,30}(\$|\d+|money)',
 }
+
+# ============================================================================
+# URL EXTRACTION & ANALYSIS FUNCTIONS
+# ============================================================================
+
+def extract_urls(text: str) -> List[str]:
+    """Extract URLs from text using regex"""
+    url_pattern = r'https?://[^\s]+'
+    urls = re.findall(url_pattern, text)
+    return urls
+
+
+def fetch_url_content(url: str, timeout: int = 5) -> Optional[str]:
+    """Fetch content from URL using requests"""
+    try:
+        response = requests.get(url, timeout=timeout, allow_redirects=True)
+        response.raise_for_status()
+        return response.text[:2000]  # Return first 2000 chars
+    except requests.RequestException as e:
+        return None
+
+
+def analyze_url_with_zeroshot(url: str, content: Optional[str]) -> Dict:
+    """Use zero-shot classification to analyze URL and fetched content"""
+    if not MODELS_AVAILABLE:
+        return {'ml_score': 0.5, 'error': 'Model not available'}
+    
+    try:
+        # Combine URL and content for analysis
+        analysis_text = f"URL: {url}\nContent: {content if content else 'Could not fetch'}"
+        
+        result = zero_shot_classifier(
+            analysis_text[:512],
+            candidate_labels=["phishing attempt", "legitimate website"],
+            multi_label=False
+        )
+        phishing_idx = result['labels'].index("phishing attempt")
+        phishing_score = result['scores'][phishing_idx]
+        
+        return {
+            'ml_score': phishing_score,
+            'labels': result['labels'],
+            'scores': result['scores']
+        }
+    except Exception as e:
+        return {'ml_score': 0.5, 'error': str(e)}
+
+
+def analyze_urls_in_message(text: str, verbose: bool = True) -> Dict:
+    """Extract and analyze all URLs in message"""
+    urls = extract_urls(text)
+    
+    if not urls:
+        return {
+            'found_urls': False,
+            'urls': []
+        }
+    
+    url_results = []
+    for url in urls:
+        if verbose:
+            print(f"  Analyzing URL: {url}")
+        
+        content = fetch_url_content(url, timeout=5)
+        if verbose and content:
+            print(f"    ✓ Fetched content ({len(content)} chars)")
+        elif verbose:
+            print(f"    ⚠️  Could not fetch content")
+        
+        zeroshot_result = analyze_url_with_zeroshot(url, content)
+        
+        url_results.append({
+            'url': url,
+            'fetched': content is not None,
+            'content_preview': content[:200] if content else None,
+            'phishing_score': zeroshot_result.get('ml_score', 0.5),
+            'error': zeroshot_result.get('error')
+        })
+    
+    return {
+        'found_urls': True,
+        'urls': url_results,
+        'max_phishing_score': max([u['phishing_score'] for u in url_results])
+    }
 
 # ============================================================================
 # TEXT ANALYSIS FUNCTIONS
@@ -107,7 +193,7 @@ def get_ml_score(text: str) -> float:
 # ============================================================================
 
 def classify_message(text: str, verbose: bool = True) -> Dict:
-    """Phishing detection using rules, text analysis, and ML."""
+    """Phishing detection using rules, text analysis, URL analysis, and ML."""
     if not text or len(text.strip()) < 10:
         return {
             'label': 'invalid',
@@ -129,16 +215,28 @@ def classify_message(text: str, verbose: bool = True) -> Dict:
             'reason': f'Phishing pattern detected: {rule_name}'
         }
 
-    # Step 2: Analyze text features
+    # Step 2: Analyze URLs in message
+    url_analysis = analyze_urls_in_message(text, verbose=verbose)
+    url_score = 0.0
+    url_indicators = []
+    
+    if url_analysis['found_urls']:
+        url_score = url_analysis['max_phishing_score']
+        if url_score >= 0.5:
+            url_indicators.append(f"suspicious URLs detected (score: {url_score:.3f})")
+
+    # Step 3: Analyze text features
     text_analysis = analyze_text_features(text)
     text_score = text_analysis['score']
 
-    # Step 3: ML model
+    # Step 4: ML model
     ml_score = get_ml_score(text) if MODELS_AVAILABLE else 0.5
 
-    # Step 4: Combine scores
-    if MODELS_AVAILABLE:
-        final_score = ml_score
+    # Step 5: Combine scores (prioritize URL analysis if URLs found)
+    if url_analysis['found_urls'] and url_score >= 0.5:
+        final_score = url_score
+    elif MODELS_AVAILABLE:
+        final_score = max(ml_score, text_score)
     else:
         final_score = text_score
 
@@ -155,6 +253,8 @@ def classify_message(text: str, verbose: bool = True) -> Dict:
 
     # Build reason
     reasons = []
+    if url_indicators:
+        reasons.extend(url_indicators)
     if text_analysis['indicators']:
         reasons.append(f"text: {', '.join(text_analysis['indicators'])}")
     if MODELS_AVAILABLE and ml_score > 0.6:
@@ -168,6 +268,8 @@ def classify_message(text: str, verbose: bool = True) -> Dict:
         'details': {
             'text_score': round(text_score, 3),
             'ml_score': round(ml_score, 3) if MODELS_AVAILABLE else None,
+            'url_score': round(url_score, 3) if url_analysis['found_urls'] else None,
+            'urls': url_analysis if url_analysis['found_urls'] else None,
         }
     }
 
@@ -221,6 +323,20 @@ def print_result(result: Dict, show_details: bool = True):
             print(f"Text Score:  {details['text_score']:.3f}")
             if details['ml_score'] is not None:
                 print(f"ML Score:    {details['ml_score']:.3f}")
+            if details['url_score'] is not None:
+                print(f"URL Score:   {details['url_score']:.3f}")
+            
+            # Print URL analysis details
+            if details['urls'] and details['urls']['found_urls']:
+                print(f"\n--- URLs Found ({len(details['urls']['urls'])}) ---")
+                for url_result in details['urls']['urls']:
+                    print(f"  URL: {url_result['url']}")
+                    print(f"    Phishing Score: {url_result['phishing_score']:.3f}")
+                    print(f"    Fetched: {'✓' if url_result['fetched'] else '✗'}")
+                    if url_result['content_preview']:
+                        print(f"    Preview: {url_result['content_preview'][:100]}...")
+                    if url_result['error']:
+                        print(f"    Error: {url_result['error']}")
 
         print("\n" + "=" * 70)
 
