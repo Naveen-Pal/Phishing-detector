@@ -1,8 +1,8 @@
-# 🛡️ Phishing Detector
+# Phishing Detector
 
 A Python-based phishing detection system that identifies phishing emails and messages using a multi-layered approach combining rule-based detection, text feature analysis, URL analysis, and machine learning.
 
-## ✨ Features
+## Features
 
 - **Rule-based detection** — instant, high-precision pattern matching for known phishing patterns
 - **Text feature analysis** — detects urgency language, credential requests, excessive punctuation, and generic greetings
@@ -11,7 +11,7 @@ A Python-based phishing detection system that identifies phishing emails and mes
 - **Hybrid ensemble scoring** — combines all signals for a final phishing score and confidence level
 - **Detailed output** — per-component score breakdown with human-readable reasons
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 Phishing-detector/
@@ -21,7 +21,7 @@ Phishing-detector/
 └── PRETRAINED_MODEL_APPROACH.md  # Technical deep-dive & model guide
 ```
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -31,7 +31,7 @@ Phishing-detector/
 | Deep Learning | PyTorch ≥ 2.0.0 |
 | HTTP Requests | requests ≥ 2.28.0 |
 
-## ⚙️ Installation
+## Installation
 
 1. **Clone the repository**
    ```bash
@@ -102,78 +102,3 @@ Reason:     no major concerns
 | `0` | Benign or suspicious message |
 | `1` | Error occurred |
 | `2` | Phishing detected |
-
-## 🔍 How It Works
-
-The detector runs four analysis stages in sequence and combines their scores:
-
-```
-Input message
-     │
-     ▼
-1. Rule-based check  ──► instant high-confidence match → score = 1.0
-     │ (no match)
-     ▼
-2. Text feature analysis
-   • Urgency language
-   • Credential requests
-   • Excessive punctuation
-   • Generic greetings
-     │
-     ▼
-3. URL extraction & ML classification
-   • Lexical URL analysis
-   • Content fetching
-   • Zero-shot URL classification
-     │
-     ▼
-4. ML zero-shot classification (BART-large-mnli)
-     │
-     ▼
-Ensemble scoring
-   • Rules match         → score = 1.0 (phishing)
-   • URL score ≥ 0.5     → prioritize URL score
-   • Otherwise           → max(ML score, text score)
-     │
-     ▼
-Final result  { label, score, confidence, reason, details }
-```
-
-### Confidence Thresholds
-
-| Score | Label | Confidence |
-|-------|-------|------------|
-| ≥ 0.85 | phishing | high |
-| ≥ 0.50 | phishing | medium |
-| 0.20 – 0.49 | suspicious | medium |
-| ≤ 0.25 | benign | high |
-| < 0.20 | benign | n/a |
-
-## 📦 Output Format
-
-```python
-{
-    'label':      'phishing' | 'suspicious' | 'benign' | 'invalid',
-    'score':      float,     # 0.0 – 1.0
-    'confidence': 'high' | 'medium' | 'n/a',
-    'reason':     str,
-    'details': {
-        'text_score': float,
-        'ml_score':   float,
-        'url_score':  float,
-        'urls':       dict
-    }
-}
-```
-
-## 📄 Documentation
-
-For a detailed technical guide covering available pre-trained models, URL lexical feature extraction, homograph detection, typosquatting detection, and API reputation checking (Google Safe Browsing / PhishTank), see [PRETRAINED_MODEL_APPROACH.md](PRETRAINED_MODEL_APPROACH.md).
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to open an issue or submit a pull request.
-
-## 📝 License
-
-This project is open source. See the repository for details.
