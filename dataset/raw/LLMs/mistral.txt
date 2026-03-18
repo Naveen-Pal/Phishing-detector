@@ -1,0 +1,555 @@
+400,Email,"Subject: Urgent Business Proposal from Dr. [Name]
+Dear Sir/Madam,
+I am Dr. [Name], the Director of Operations at [Bank Name] in Lagos, Nigeria. I have a confidential business proposal for you. A foreign client, Mr. [Name], deposited the sum of $25,000,000.00 (Twenty-Five Million US Dollars) in our bank. Unfortunately, he passed away in a plane crash with his family, leaving no next of kin.
+As the account officer, I am seeking your assistance to transfer this fund out of Nigeria. The bank has issued a notice to provide the next of kin or the account will be confiscated. I propose that you stand as the next of kin so that the funds can be transferred to your account. For your assistance, you will be entitled to 30% of the total sum, while 70% will be for me.
+This transaction is 100% risk-free and legally protected. All necessary arrangements have been made for the smooth transfer of the funds. Please reply with your full name, address, and telephone number for further details.
+Yours faithfully,
+Dr. [Name]
+[Bank Name], Lagos, Nigeria
+[Phone Number]"
+401,SMS,"URGENT: Your bank account has been flagged for suspicious activity! To prevent suspension, verify your details now at [URL]. Failure to comply within 24 hours will result in permanent account closure. [Bank Name] Security Team. Reply STOP to opt out."
+402,Email,"Subject: Your Tax Refund is Ready - Immediate Action Required
+Dear [Name],
+We have reviewed your tax return and identified an error in your favor. You are eligible for a refund of ₹[Amount]. To process your refund, we require you to verify your bank details and pay a small processing fee of ₹1,500.
+Please click here: [URL] to complete the verification process. Failure to respond within 72 hours will result in the cancellation of your refund.
+Regards,
+[Name]
+Senior Tax Officer
+Income Tax Department of India
+[Phone Number]"
+403,SMS,"Hi [Name], it's me, your new friend from [Social Media Platform]. I've been thinking about you a lot. I have a business opportunity that can make us both rich, but I need your help. Can you lend me ₹[Amount]? I promise to pay you back double next week. Trust me, I won't let you down."
+404,Email,"Subject: Your Amazon Order #123-4567890-1234567 Has Shipped!
+Dear Customer,
+Your order has been shipped and will arrive by [Date]. However, there was a problem processing your payment. To avoid cancellation, please update your payment details immediately by clicking here: [URL].
+If we do not receive your payment within 24 hours, your order will be cancelled and your account may be suspended.
+Thank you for shopping with Amazon.
+Sincerely,
+Amazon Customer Service"
+405,SMS,"ALERT: Your debit card ending in 4567 has been temporarily locked due to suspicious activity. Call us immediately at [Phone Number] to unlock your card and prevent fraud. Do not ignore this message."
+406,Email,"Subject: Exclusive Investment Opportunity - Guaranteed 200% Return!
+Dear [Name],
+I am reaching out to offer you an exclusive opportunity to invest in a high-yield, low-risk portfolio. Our team of experts has identified a unique market opportunity that guarantees a 200% return on investment within 6 months.
+To get started, simply transfer a minimum of ₹[Amount] to the following account:
+Bank: [Bank Name]
+Account Number: [Account Number]
+IFSC: [IFSC Code]
+Once your transfer is confirmed, you will receive your investment certificate and weekly updates on your returns.
+Act now—this offer is only available to the first 50 investors!
+Best regards,
+[Name]
+Senior Investment Advisor
+[Company] Wealth Management"
+407,SMS,"URGENT: Your Aadhaar card has been linked to 3 suspicious bank accounts. To secure your identity, verify your details now at [URL]. Failure to comply will result in permanent deactivation. - UIDAI"
+408,Email,"Subject: Your Netflix Account Has Been Suspended
+Dear [Name],
+We regret to inform you that your Netflix account has been suspended due to a billing error. To restore access, please update your payment information by clicking the link below:
+[URL]
+If you do not update your payment details within 48 hours, your account will be permanently closed, and you will lose access to all your favorite shows and movies.
+Thank you,
+The Netflix Team"
+409,SMS,"Hi [Name], I'm [Name], a senior analyst at [Company]. I have insider info on a stock that's about to skyrocket. Invest ₹[Amount] now and make 10x profit in a week! Reply YES to get the stock code. Limited time offer!"
+410,Email,"Subject: You Have Won the Microsoft Lottery!
+Dear Lucky Winner,
+Congratulations! Your email address has been selected as the winner of the Microsoft International Lottery. You have won a cash prize of $1,000,000 USD!
+To claim your prize, please contact our claims agent, Mr. [Name], at [Phone Number] or reply to this email with your full name, address, and telephone number. A processing fee of $500 is required to release your funds.
+Claim your prize now—this offer expires in 7 days!
+Sincerely,
+Microsoft Lottery Team"
+411,Email,"Subject: Urgent: Your Business Loan Application is Approved!
+Dear [Name],
+Congratulations! Your application for a business loan of ₹[Amount] has been pre-approved by [Bank Name]. To finalize the disbursement, we require a one-time processing fee of ₹15,000 to be paid within 48 hours.
+Please transfer the fee to the following account:
+Bank: [Bank Name]
+Account Number: [Account Number]
+IFSC: [IFSC Code]
+Once the fee is received, your loan amount will be credited to your account within 24 hours. Do not miss this opportunity to grow your business!
+For any queries, contact our loan officer at [Phone Number].
+Best regards,
+[Name]
+Loan Department
+[Bank Name]"
+412,SMS,"URGENT: Your SIM card will be deactivated in 2 hours due to a network upgrade. To continue service, call [Phone Number] immediately and provide your last recharge details. - [Telecom Provider]"
+413,Email,"Subject: Your PayPal Account Needs Immediate Verification
+Dear [Name],
+We noticed an unusual login attempt on your PayPal account from a new device. For your security, we have temporarily limited your account access.
+To restore full access, please verify your identity by clicking the link below and providing your login credentials:
+[URL]
+If you did not authorize this login attempt, your account may be at risk. Please verify immediately to avoid permanent suspension.
+Thank you,
+PayPal Security Team"
+414,SMS,"Hi [Name], your Kisan Credit Card limit has been increased to ₹[Amount]! To activate, share your card details and OTP with our executive at [Phone Number]. Offer valid for today only. - [Bank Name]"
+415,Email,"Subject: Final Notice: Your Domain is About to Expire
+Dear Domain Owner,
+This is a final reminder that your domain [Domain Name] is set to expire on [Date]. Failure to renew will result in the loss of your domain and all associated services.
+To renew your domain for just ₹[Amount], click the link below:
+[URL]
+If you do not renew within 24 hours, your domain will be released to the public and may be registered by someone else.
+Sincerely,
+[Company] Domain Services"
+416,SMS,"ALERT: Your credit card ending in 1234 was used for a transaction of ₹[Amount] at [Store Name]. If this was not you, call [Phone Number] immediately to block your card. - [Bank Name] Fraud Team"
+417,Email,"Subject: Your Insurance Policy is Due for Renewal – Special Discount Inside!
+Dear [Name],
+Your health insurance policy with [Insurance Company] is due for renewal on [Date]. As a valued customer, we are offering you a special discount of 20% if you renew before [Date].
+To take advantage of this offer, please click the link below and update your payment details:
+[URL]
+If we do not receive your payment by the due date, your coverage will lapse, and you may face a waiting period for new applications.
+Best regards,
+[Name]
+Customer Service Manager
+[Insurance Company]"
+418,SMS,"Hi [Name], your Zomato order #123456 has been dispatched! Your delivery agent will call you shortly to confirm the OTP. Please share the OTP: [OTP] to ensure smooth delivery. - Zomato Team"
+419,Email,"Subject: Your Apple ID Has Been Locked for Security Reasons
+Dear [Name],
+Your Apple ID has been locked due to multiple failed login attempts. To unlock your account and prevent permanent suspension, please verify your identity by clicking the link below:
+[URL]
+If you did not attempt to log in, your account may have been compromised. Immediate action is required to secure your account and prevent unauthorized access.
+Thank you,
+Apple Support Team"
+420,SMS,"URGENT: Your gas connection will be disconnected tomorrow due to non-payment. To avoid interruption, pay ₹[Amount] immediately at [URL]. - [Gas Provider]"
+421,Email,"Subject: Your Corporate Invoice #INV-2026-02-421 is Overdue
+Dear Accounts Payable,
+We hope this email finds you well. This is a final reminder that Invoice #INV-2026-02-421 for ₹[Amount] is now 30 days overdue. According to our records, payment was due on [Date].
+To avoid late fees and potential service disruption, please process the payment immediately. You can find the invoice attached or download it here: [URL]
+If payment has already been made, please disregard this notice and provide us with the transaction details for reconciliation.
+Best regards,
+[Name]
+Finance Department
+[Company] Solutions Pvt. Ltd."
+422,SMS,"Hi [Name], your Flipkart order #FK123456789 is on hold due to a payment issue. To release your order, update your card details here: [URL]. Failure to do so within 12 hours will result in cancellation. - Flipkart Team"
+423,Email,"Subject: Exclusive Pre-IPO Investment Opportunity – Act Now!
+Dear [Name],
+We are pleased to offer you an exclusive opportunity to invest in [Company], a revolutionary tech startup, before its highly anticipated IPO. Our private investors have already seen a 300% return in the last 6 months, and we expect the IPO to deliver even greater profits.
+Minimum investment: ₹[Amount]
+Projected ROI: 500% within 12 months
+To secure your allocation, reply to this email or call [Phone Number] immediately. This offer is only available to a select group of investors and will close by [Date].
+Don’t miss out on the next big thing!
+Best regards,
+[Name]
+Investment Director
+[Company] Capital Partners"
+424,SMS,"ALERT: Your Aadhaar is linked to 2 suspicious bank accounts. To prevent fraud, verify your identity now at [URL]. Non-compliance will result in account freeze. - UIDAI Security"
+425,Email,"Subject: Your Hotel Reservation at [Hotel Name] – Confirmation Required
+Dear [Name],
+Thank you for your recent reservation at [Hotel Name] for your stay from [Check-in Date] to [Check-out Date]. To finalize your booking, we require a deposit of ₹[Amount] to secure your room.
+Please click the link below to complete your payment:
+[URL]
+If we do not receive your deposit within 48 hours, your reservation will be automatically cancelled.
+We look forward to welcoming you!
+Warm regards,
+[Name]
+Reservations Manager
+[Hotel Name]"
+426,SMS,"Hi [Name], your IRCTC train ticket PNR: 1234567890 is unconfirmed. To confirm your seat, pay ₹[Amount] now at [URL]. Offer valid for next 2 hours only. - IRCTC"
+427,Email,"Subject: Your Subscription to [Magazine Name] is About to Expire
+Dear [Name],
+Your annual subscription to [Magazine Name] will expire on [Date]. To continue receiving your monthly issues without interruption, please renew your subscription today.
+Special Renewal Offer: 25% Discount if you renew now!
+Click here to renew: [URL]
+If you choose not to renew, your subscription will lapse, and you will miss out on our exclusive content.
+Thank you for being a valued reader!
+Best regards,
+[Name]
+Customer Service
+[Magazine Name]"
+428,SMS,"URGENT: Your electricity bill for Feb 2026 is overdue. To avoid disconnection, pay ₹[Amount] immediately at [URL] or call [Phone Number]. - [Electricity Board]"
+429,Email,"Subject: Your Domain [Domain Name] Has Been Suspended for Copyright Infringement
+Dear Domain Owner,
+We regret to inform you that your domain [Domain Name] has been suspended due to a copyright infringement complaint. To resolve this issue and restore your website, you must submit a counter-notice and pay an administrative fee of ₹[Amount].
+Please click here to submit your counter-notice and make the payment: [URL]
+If we do not receive your response within 72 hours, your domain will be permanently deactivated.
+Sincerely,
+[Name]
+Legal Department
+[Hosting Company]"
+430,SMS,"Hi [Name], your Ola ride from [Pickup] to [Drop] is confirmed. Your driver, [Driver Name], will call you shortly to confirm the OTP: [OTP]. Do not share this OTP with anyone else. - Ola Cabs"
+431,Email,"Subject: Your Corporate Credit Card Statement – Immediate Review Required
+Dear [Name],
+We have detected unusual transactions on your corporate credit card ending in 1234. For your security, we have temporarily suspended the card.
+To review the transactions and reactivate your card, please log in to your account here: [URL]
+If you did not authorize these transactions, please contact our fraud department immediately at [Phone Number].
+Best regards,
+[Name]
+Corporate Card Services
+[Bank Name]"
+432,SMS,"ALERT: Your Swiggy order #SW123456 is on the way! Your delivery agent will call to confirm the OTP: [OTP]. Do NOT share this OTP with anyone except the agent. - Swiggy Team"
+433,Email,"Subject: Your Insurance Claim #CLM-2026-02-433 Has Been Processed
+Dear [Name],
+We are pleased to inform you that your insurance claim #CLM-2026-02-433 has been approved. To release the funds, we require a processing fee of ₹[Amount] to be paid within 48 hours.
+Please transfer the fee to the following account:
+Bank: [Bank Name]
+Account Number: [Account Number]
+IFSC: [IFSC Code]
+Once the fee is received, your claim amount of ₹[Amount] will be credited to your account within 24 hours.
+For any queries, contact our claims officer at [Phone Number].
+Best regards,
+[Name]
+Claims Department
+[Insurance Company]"
+434,SMS,"Hi [Name], your Airtel postpaid bill for Feb 2026 is ₹[Amount]. Pay now to avoid late fees: [URL]. Last date: [Date]. - Airtel"
+435,Email,"Subject: Your Tax Return is Under Audit – Immediate Response Required
+Dear [Name],
+We have selected your tax return for the year 2025-26 for a routine audit. To avoid penalties, please provide the following documents within 7 days:
+
+Bank statements for the last 12 months
+Proof of income and investments
+Upload your documents here: [URL]
+Failure to comply will result in a fine of ₹[Amount] and legal action.
+Sincerely,
+[Name]
+Tax Audit Officer
+Income Tax Department of India"
+436,SMS,"URGENT: Your SBI debit card ending in 5678 has been blocked due to suspicious activity. Call [Phone Number] immediately to unblock. - SBI"
+437,Email,"Subject: Your Subscription to [Streaming Service] Has Been Suspended
+Dear [Name],
+Your subscription to [Streaming Service] has been suspended due to a billing error. To restore access, please update your payment information by clicking the link below:
+[URL]
+If you do not update your payment details within 48 hours, your account will be permanently closed, and you will lose access to all your saved content.
+Thank you,
+[Streaming Service] Support Team"
+438,SMS,"Hi [Name], your Amazon Pay balance of ₹[Amount] is about to expire. To extend validity, click [URL] and complete the verification process. - Amazon Pay"
+439,Email,"Subject: Your Job Application at [Company] – Next Steps
+Dear [Name],
+Congratulations! Your application for the position of [Job Title] at [Company] has been shortlisted. To proceed, we require a refundable security deposit of ₹[Amount] to cover background check and onboarding expenses.
+Please transfer the deposit to:
+Bank: [Bank Name]
+Account Number: [Account Number]
+IFSC: [IFSC Code]
+Once received, we will schedule your interview and refund the deposit upon joining.
+Best regards,
+[Name]
+HR Manager
+[Company]"
+440,SMS,"ALERT: Your gas cylinder booking for [Date] is confirmed. To reschedule, call [Phone Number] and provide your OTP: [OTP]. - [Gas Provider]"
+441,Email,"Subject: Your Business Partnership Proposal with [Company]
+Dear [Name],
+I hope this email finds you well. I am [Name], the CEO of [Company], a leading international trading firm. We are currently seeking a reliable partner in India to facilitate a high-value transaction involving the import of electronics.
+We are prepared to offer a 15% commission on every successful transaction. To proceed, we require you to set up a local account and provide us with the details for fund transfers. An initial deposit of ₹[Amount] is required to cover administrative costs.
+Please reply with your bank details and a copy of your PAN card for verification. We look forward to a fruitful partnership.
+Best regards,
+[Name]
+CEO, [Company]
+[Phone Number]"
+442,SMS,"Hi [Name], your Paytm wallet has been credited with ₹[Amount] as cashback. To claim, verify your account here: [URL]. Offer valid for 24 hours only. - Paytm"
+443,Email,"Subject: Your Domain [Domain Name] – Legal Notice for Trademark Violation
+Dear Domain Owner,
+This is a formal notice that your domain [Domain Name] is in violation of trademark laws. To avoid legal action, you must transfer the domain to the rightful owner or pay a settlement fee of ₹[Amount].
+Please respond within 72 hours by clicking here: [URL]
+Failure to comply will result in legal proceedings and the suspension of your domain.
+Sincerely,
+[Name]
+Legal Department
+[Law Firm]"
+444,SMS,"URGENT: Your Jio number will be deactivated in 2 hours due to KYC non-compliance. Update now: [URL]. - Jio Care"
+445,Email,"Subject: Your Loan Application with [Bank Name] – Final Approval Pending
+Dear [Name],
+Your loan application for ₹[Amount] is in the final stage of approval. To complete the process, we require a processing fee of ₹[Amount] to be paid within 24 hours.
+Please transfer the fee to:
+Bank: [Bank Name]
+Account Number: [Account Number]
+IFSC: [IFSC Code]
+Once the fee is received, your loan will be disbursed within 2 working days.
+Best regards,
+[Name]
+Loan Processing Officer
+[Bank Name]"
+446,SMS,"Hi [Name], your Ola Money wallet has a pending cashback of ₹[Amount]. To credit it to your account, verify your details here: [URL]. - Ola Money"
+447,Email,"Subject: Your Account with [Bank Name] – Suspicious Activity Detected
+Dear [Name],
+We have detected suspicious activity on your [Bank Name] account. For your security, we have temporarily locked your account.
+To unlock your account, please verify your identity by clicking the link below:
+[URL]
+If you did not authorize the recent transactions, please contact our fraud department immediately at [Phone Number].
+Thank you,
+[Bank Name] Security Team"
+448,SMS,"ALERT: Your Indane gas booking for [Date] is confirmed. To cancel or reschedule, call [Phone Number] and provide your OTP: [OTP]. - Indane Gas"
+449,Email,"Subject: Your Investment Portfolio Update – High Return Opportunity
+Dear [Name],
+Your investment portfolio with [Company] has performed exceptionally well, yielding a 20% return in the last quarter. We are now offering an exclusive opportunity to invest in a new high-growth fund with a projected return of 50% in 6 months.
+Minimum investment: ₹[Amount]
+To participate, reply to this email or call [Phone Number] by [Date].
+Don’t miss this chance to grow your wealth!
+Best regards,
+[Name]
+Portfolio Manager
+[Company]"
+450,SMS,"Hi [Name], your PhonePe transaction of ₹[Amount] at [Merchant] is pending. To complete, share the OTP: [OTP] with the merchant. - PhonePe"
+451,Email,"Subject: Your Inheritance Claim from [Law Firm]
+Dear [Name],
+We are writing on behalf of the estate of your late relative, [Name], who passed away in [Country]. You have been named as a beneficiary in the will, with an inheritance of $[Amount] USD.
+To process your claim, we require a processing fee of $[Amount] to cover legal and administrative costs. Please transfer the fee to the following account:
+Bank: [Bank Name]
+Account Number: [Account Number]
+Swift Code: [Swift Code]
+Once the fee is received, your inheritance will be released within 7 business days.
+Please reply with your full name, address, and a copy of your passport for verification.
+Sincerely,
+[Name]
+Senior Partner
+[Law Firm]
+[Phone Number]"
+452,SMS,"URGENT: Your Vodafone number will be disconnected in 1 hour due to outstanding dues of ₹[Amount]. Pay now: [URL]. - Vodafone"
+453,Email,"Subject: Your Amazon Seller Account Verification Required
+Dear Seller,
+Your Amazon Seller account has been flagged for verification. To avoid suspension, please provide the following documents within 48 hours:
+
+GST Certificate
+Bank Statement (last 3 months)
+PAN Card
+Upload your documents here: [URL]
+Failure to comply will result in the deactivation of your seller account and withholding of your funds.
+Best regards,
+Amazon Seller Support"
+454,SMS,"Hi [Name], your Zomato Gold membership is expiring soon! Renew now for just ₹[Amount]/month and get unlimited dining benefits: [URL]. - Zomato"
+455,Email,"Subject: Your Corporate Travel Booking Confirmation – Payment Pending
+Dear [Name],
+Your corporate travel booking for your trip to [Destination] from [Date] to [Date] is almost complete. To confirm your reservation, please process the payment of ₹[Amount] using the link below:
+[URL]
+If payment is not received within 24 hours, your booking will be automatically cancelled, and you may incur late fees.
+Thank you,
+[Name]
+Travel Desk
+[Company]"
+456,SMS,"ALERT: Your SBI credit card ending in 1234 has a pending reward of ₹[Amount]. Redeem now: [URL]. Offer expires in 2 days. - SBI Card"
+457,Email,"Subject: Your Subscription to [Software Name] – Auto-Renewal Notice
+Dear [Name],
+Your annual subscription to [Software Name] is set to auto-renew on [Date] for ₹[Amount]. To avoid interruption of service, please ensure your payment details are up to date.
+If you wish to cancel your subscription, please click here: [URL]
+Failure to update your payment information may result in the suspension of your account.
+Best regards,
+[Software Name] Billing Team"
+458,SMS,"Hi [Name], your Flipkart Plus membership rewards are ready! Claim your ₹[Amount] gift card now: [URL]. Limited time offer. - Flipkart"
+459,Email,"Subject: Your Job Offer from [Company] – Next Steps
+Dear [Name],
+We are pleased to offer you the position of [Job Title] at [Company]. To accept this offer, we require a refundable security deposit of ₹[Amount] to initiate your background check and onboarding process.
+Please transfer the deposit to:
+Bank: [Bank Name]
+Account Number: [Account Number]
+IFSC: [IFSC Code]
+Once received, we will send you the official offer letter and further details.
+Congratulations, and welcome to the team!
+Best regards,
+[Name]
+HR Director
+[Company]"
+460,SMS,"URGENT: Your BSNL landline will be disconnected tomorrow due to non-payment. Pay ₹[Amount] now: [URL]. - BSNL"
+461,Email,"Subject: Your Business Loan Pre-Approval from [Bank Name]
+Dear [Name],
+Congratulations! Your business loan application for ₹[Amount] has been pre-approved by [Bank Name]. To finalize the disbursement, we require a one-time processing fee of ₹[Amount] to be paid within 24 hours.
+Please transfer the fee to:
+Bank: [Bank Name]
+Account Number: [Account Number]
+IFSC: [IFSC Code]
+Once the fee is received, your loan amount will be credited to your account within 2 working days.
+For any queries, contact our loan officer at [Phone Number].
+Best regards,
+[Name]
+Loan Department
+[Bank Name]"
+462,SMS,"Hi [Name], your Paytm Postpaid bill of ₹[Amount] is due. Pay now to avoid late fees: [URL]. Last date: [Date]. - Paytm"
+463,Email,"Subject: Your Domain [Domain Name] – Immediate Renewal Required
+Dear [Name],
+Your domain [Domain Name] is set to expire on [Date]. Failure to renew will result in the loss of your domain and all associated email services.
+To renew your domain for just ₹[Amount], click the link below:
+[URL]
+If you do not renew within 24 hours, your domain will be released to the public.
+Sincerely,
+[Name]
+Domain Services
+[Company]"
+464,SMS,"ALERT: Your ICICI credit card ending in 5678 has a pending cashback of ₹[Amount]. Redeem now: [URL]. Offer valid for 48 hours. - ICICI Bank"
+465,Email,"Subject: Your Tax Refund is Ready – Verify Your Details
+Dear [Name],
+Your tax refund of ₹[Amount] is ready for processing. To verify your bank details and release your refund, please click the link below:
+[URL]
+If we do not receive your verification within 72 hours, your refund will be cancelled.
+Regards,
+[Name]
+Income Tax Department of India"
+466,SMS,"Hi [Name], your Uber ride from [Pickup] to [Drop] is confirmed. Your driver, [Driver Name], will call you shortly to confirm the OTP: [OTP]. - Uber"
+467,Email,"Subject: Your Subscription to [Service Name] – Payment Failed
+Dear [Name],
+Your recent payment for [Service Name] has failed. To avoid service interruption, please update your payment details by clicking the link below:
+[URL]
+If we do not receive your updated payment information within 48 hours, your subscription will be cancelled.
+Thank you,
+[Service Name] Billing Team"
+468,SMS,"URGENT: Your Tata Sky connection will be disconnected today due to non-payment. Pay ₹[Amount] now: [URL]. - Tata Sky"
+469,Email,"Subject: Your Investment Opportunity with [Company]
+Dear [Name],
+We are excited to offer you an exclusive opportunity to invest in [Company], a high-growth startup in the tech sector. Our investors have seen an average return of 300% in the last year.
+Minimum investment: ₹[Amount]
+Projected ROI: 400% within 12 months
+To secure your investment, reply to this email or call [Phone Number] by [Date].
+Don’t miss out on this limited-time offer!
+Best regards,
+[Name]
+Investment Director
+[Company]"
+470,SMS,"Hi [Name], your Google Pay transaction of ₹[Amount] is pending. To complete, share the OTP: [OTP] with the merchant. - Google Pay"
+471,Email,"Subject: Exciting Money Transfer Opportunity – Earn ₹[Amount] Weekly!
+Dear [Name],
+We are looking for reliable individuals to assist with international money transfers. As a transfer agent, you will receive funds into your account, keep a 10% commission, and forward the rest to our overseas partners.
+No experience needed! Just provide your bank details and a copy of your ID. This is a legitimate, risk-free way to earn extra income.
+Interested? Reply with your:
+
+Full Name
+Bank Account Number
+IFSC Code
+Mobile Number
+Start earning today!
+Best regards,
+[Name]
+Transfer Coordinator
+[Company]"
+472,SMS,"Hi [Name], earn ₹500 daily just by receiving and forwarding money! No investment needed. Contact [Phone Number] now to start. Limited slots available!"
+473,Email,"Subject: Secure Your Wealth – Confidential Money Laundering Service
+Dear [Name],
+We specialize in discreetly moving and cleaning funds for high-net-worth individuals. Our services ensure your assets are protected and untraceable.
+For a small fee, we can:
+
+Transfer funds internationally
+Provide clean documentation
+Ensure complete anonymity
+Contact us at [Phone Number] or reply to this email for a confidential consultation.
+Sincerely,
+[Name]
+Wealth Protection Advisor"
+474,SMS,"URGENT: Your mobile number has won a free premium subscription! Claim now: [URL]. Only 100 slots left. - [Telecom Provider]"
+475,Email,"Subject: Miracle Weight Loss Solution – Lose 10kg in 10 Days!
+Dear [Name],
+Tired of failed diets? Our revolutionary weight loss supplement is clinically proven to help you lose 10kg in just 10 days—with no exercise or dieting!
+Order now for just ₹[Amount] and get a FREE consultation with our nutritionist.
+Click here to order: [URL]
+Limited stock available—act fast!
+Best regards,
+[Name]
+Customer Care
+[Company]"
+476,SMS,"Hi [Name], your free trial of our miracle hair growth oil is waiting! Claim now: [URL]. Only ₹[Amount] for shipping. - [Company]"
+477,Email,"Subject: Breakthrough Cancer Cure – Available Now!
+Dear [Name],
+Scientists have discovered a natural cure for cancer, but pharmaceutical companies are suppressing it! Our supplement has helped thousands recover without chemotherapy.
+Order now for just ₹[Amount] and start your journey to recovery.
+Click here: [URL]
+Don’t let Big Pharma control your health!
+Sincerely,
+[Name]
+Health Advisor
+[Company]"
+478,SMS,"ALERT: Your free health check-up voucher is expiring soon! Redeem now: [URL]. - [Hospital Name]"
+479,Email,"Subject: You’ve Been Selected for a FREE Government Grant!
+Dear [Name],
+You’ve been pre-approved for a government grant of ₹[Amount]! This grant is part of a new initiative to support small businesses and individuals.
+To claim your grant, simply pay a processing fee of ₹[Amount] and provide your bank details.
+Click here to apply: [URL]
+Offer expires in 7 days—don’t miss out!
+Best regards,
+[Name]
+Grant Officer
+[Government Agency]"
+480,SMS,"Hi [Name], you’ve won a FREE psychic reading! Call [Phone Number] now to claim your session. Limited time offer!"
+481,Email,"Subject: Urgent: Change of Payment Details for [Company]
+Dear Accounts Payable,
+Please update our payment details immediately. Due to a recent restructuring, all future payments should be made to the following account:
+Bank: [Bank Name]
+Account Number: [Account Number]
+IFSC: [IFSC Code]
+This change is effective immediately. Please confirm receipt of this email and update your records.
+Best regards,
+[Name]
+Finance Director
+[Company]"
+482,SMS,"ALERT: Your computer has been infected with a virus! Click [URL] to scan and remove it now. - [Antivirus Company]"
+483,Email,"Subject: Your Package Could Not Be Delivered – Reschedule Now
+Dear [Name],
+We attempted to deliver your package on [Date], but no one was available. To reschedule delivery, please confirm your address and pay a redelivery fee of ₹[Amount] here: [URL]
+Failure to reschedule within 48 hours will result in your package being returned to the sender.
+Thank you,
+[Courier Company] Customer Service"
+484,SMS,"Hi [Name], your mailbox is full! Click [URL] to upgrade your storage and avoid missing important messages. - [Email Provider]"
+485,Email,"Subject: Reduce Your Business Rates by 50% – Limited Time Offer
+Dear [Name],
+Did you know you could be overpaying on your business rates? Our team specializes in reducing commercial property rates by up to 50%.
+For a small fee, we can:
+
+Review your current rates
+Submit a reduction claim
+Save you thousands annually
+Reply to this email or call [Phone Number] to get started today!
+Best regards,
+[Name]
+Rates Reduction Specialist
+[Company]"
+486,SMS,"URGENT: Your office supply order is pending! Confirm your delivery address here: [URL]. - [Supplier Name]"
+487,Email,"Subject: Join Our Exclusive Investment Club – Guaranteed Returns!
+Dear [Name],
+Join our exclusive investment club and earn guaranteed returns of 20% per month! Simply recruit 5 friends to invest ₹[Amount] each, and you’ll receive a bonus of ₹[Amount].
+This is a limited-time opportunity—don’t miss out!
+Click here to join: [URL]
+Best regards,
+[Name]
+Investment Club Manager"
+488,SMS,"Hi [Name], you’ve been selected for a FREE government grant! Pay ₹[Amount] processing fee to claim ₹[Amount]. Call [Phone Number] now!"
+489,Email,"Subject: Your Future Revealed – Free Psychic Reading Inside!
+Dear [Name],
+I’ve had a vision about your future, and it’s filled with prosperity! But first, you must overcome a major obstacle.
+For a limited time, I’m offering a FREE psychic reading to help you navigate this challenge. Simply reply to this email with your date of birth, and I’ll send you your personalized report.
+Don’t let this opportunity pass you by!
+Blessings,
+[Name]
+Master Psychic"
+490,SMS,"ALERT: Your property investment of ₹[Amount] is ready! Call [Phone Number] to claim your deed. - [Company]"
+491,Email,"Subject: Exclusive Property Investment Opportunity – Limited Units Available!
+Dear [Name],
+Invest in our luxury residential project in [City] and enjoy guaranteed returns of 25% per annum! With just ₹[Amount] as an initial deposit, you can secure your unit before prices increase.
+Project Highlights:
+
+Prime location in [City]
+World-class amenities
+Assured rental income
+Hurry, only 10 units left! Reply to this email or call [Phone Number] to book your unit today.
+Best regards,
+[Name]
+Sales Director
+[Company]"
+492,SMS,"Hi [Name], your company has been awarded a government tender! To process the paperwork, pay ₹[Amount] as a security deposit at [URL]. - [Government Department]"
+493,Email,"Subject: Your Procurement Order #PO-2026-493 – Payment Update Required
+Dear [Name],
+Your recent procurement order #PO-2026-493 for office supplies is ready for dispatch. However, we noticed a discrepancy in the payment details.
+To avoid delays, please update the payment information here: [URL]
+If the payment is not processed within 24 hours, your order will be cancelled.
+Thank you,
+[Name]
+Procurement Manager
+[Supplier Company]"
+494,SMS,"URGENT: Your investment in our Ponzi scheme is yielding 30% monthly! Refer 3 friends and get a ₹[Amount] bonus. Call [Phone Number] now!"
+495,Email,"Subject: Your Bank Account Security Alert – Immediate Action Required
+Dear [Name],
+We have detected suspicious activity on your [Bank Name] account. To secure your account, please verify your login details by clicking the link below:
+[URL]
+Failure to verify within 24 hours will result in the suspension of your account.
+Thank you,
+[Bank Name] Security Team"
+496,SMS,"Hi [Name], your pension fund is at risk! Transfer your savings to a secure account now. Call [Phone Number] for assistance. - [Pension Authority]"
+497,Email,"Subject: Your Salary Payment – New Bank Details
+Dear [Name],
+Due to a recent system upgrade, your salary will now be paid into a new account. Please update your records with the following details:
+Bank: [Bank Name]
+Account Number: [Account Number]
+IFSC: [IFSC Code]
+Confirm receipt of this email to ensure your next salary payment is processed correctly.
+Best regards,
+[Name]
+HR Department
+[Company]"
+498,SMS,"ALERT: Your online payment of ₹[Amount] to [Merchant] failed. Retry now: [URL]. - [Payment Gateway]"
+499,Email,"Subject: Your Dream Job Awaits – Work from Home and Earn ₹[Amount]/Month!
+Dear [Name],
+We are hiring remote workers for data entry positions. No experience needed! Earn ₹[Amount] per month with flexible hours.
+To apply, pay a one-time registration fee of ₹[Amount] here: [URL]
+Limited positions available—apply now!
+Best regards,
+[Name]
+Recruitment Manager
+[Company]"
+500,SMS,"Hi [Name], your timeshare property in Goa is ready for resale! Pay ₹[Amount] to list it and attract buyers. Call [Phone Number] now!"
