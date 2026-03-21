@@ -6,8 +6,9 @@ Uses rule-based checks, text analysis, and optional ML model.
 
 import re
 import requests
+from email import policy
+from email.parser import BytesParser
 from typing import Dict, Tuple, Optional, List
-from urllib.parse import urlparse
 
 print("Initializing Phishing Detection System...")
 
@@ -131,6 +132,121 @@ def analyze_urls_in_message(text: str, verbose: bool = True) -> Dict:
 # TEXT ANALYSIS FUNCTIONS
 # ============================================================================
 
+def parse_email_input(raw_text: str) -> Tuple[str, Dict[str, str]]:
+    """Parse simple header-style text input into body and sender metadata."""
+    if not raw_text:
+        return "", {}
+
+    lines = raw_text.splitlines()
+    headers: Dict[str, str] = {}
+    body_start = 0
+    saw_header = False
+
+    for idx, line in enumerate(lines):
+        if line.strip() == "":
+            body_start = idx + 1
+            break
+
+        header_match = re.match(r'^([A-Za-z][A-Za-z0-9\-]*):\s*(.*)$', line)
+        if not header_match:
+            return raw_text.strip(), {}
+
+        saw_header = True
+        key = header_match.group(1).lower().replace('-', '_')
+        headers[key] = header_match.group(2).strip()
+    else:
+        body_start = len(lines)
+
+    body = "\n".join(lines[body_start:]).strip() if saw_header else raw_text.strip()
+    sender_info = {
+        'from': headers.get('from', ''),
+        'reply_to': headers.get('reply_to', ''),
+        'return_path': headers.get('return_path', ''),
+        'subject': headers.get('subject', ''),
+    }
+    return body if body else raw_text.strip(), sender_info
+
+
+def _strip_html_tags(html: str) -> str:
+    """Convert basic HTML body content to readable plain text."""
+    if not html:
+        return ''
+    html = re.sub(r'(?is)<(script|style).*?>.*?</\1>', ' ', html)
+    html = re.sub(r'(?is)<br\s*/?>', '\n', html)
+    html = re.sub(r'(?is)</p\s*>', '\n', html)
+    html = re.sub(r'(?is)<[^>]+>', ' ', html)
+    html = re.sub(r'\s+', ' ', html)
+    return html.strip()
+
+
+def parse_eml_input(raw_bytes: bytes) -> Tuple[str, Dict[str, str]]:
+    """Parse .eml bytes and return extracted body text + sender metadata."""
+    if not raw_bytes:
+        return "", {}
+
+    try:
+        msg = BytesParser(policy=policy.default).parsebytes(raw_bytes)
+    except Exception:
+        fallback_text = raw_bytes.decode('utf-8', errors='replace')
+        return parse_email_input(fallback_text)
+
+    sender_info = {
+        'from': str(msg.get('From', '') or '').strip(),
+        'reply_to': str(msg.get('Reply-To', '') or '').strip(),
+        'return_path': str(msg.get('Return-Path', '') or '').strip(),
+        'subject': str(msg.get('Subject', '') or '').strip(),
+    }
+
+    plain_parts: List[str] = []
+    html_parts: List[str] = []
+
+    if msg.is_multipart():
+        for part in msg.walk():
+            content_type = part.get_content_type()
+            disposition = str(part.get_content_disposition() or '').lower()
+            if disposition == 'attachment':
+                continue
+            try:
+                content = part.get_content()
+            except Exception:
+                continue
+
+            if not isinstance(content, str) or not content.strip():
+                continue
+
+            if content_type == 'text/plain':
+                plain_parts.append(content.strip())
+            elif content_type == 'text/html':
+                cleaned = _strip_html_tags(content)
+                if cleaned:
+                    html_parts.append(cleaned)
+    else:
+        try:
+            content = msg.get_content()
+        except Exception:
+            content = ''
+
+        if isinstance(content, str) and content.strip():
+            if msg.get_content_type() == 'text/html':
+                cleaned = _strip_html_tags(content)
+                if cleaned:
+                    html_parts.append(cleaned)
+            else:
+                plain_parts.append(content.strip())
+
+    body = '\n\n'.join(plain_parts).strip() if plain_parts else '\n\n'.join(html_parts).strip()
+
+    if not body:
+        fallback_text = raw_bytes.decode('utf-8', errors='replace').strip()
+        if fallback_text:
+            body, fallback_sender = parse_email_input(fallback_text)
+            for key, value in fallback_sender.items():
+                if not sender_info.get(key):
+                    sender_info[key] = value
+
+    return body, sender_info
+
+
 def check_rules(text: str) -> Tuple[bool, Optional[str]]:
     """Check message against phishing rules"""
     for rule_name, pattern in PHISHING_RULES.items():
@@ -172,13 +288,23 @@ def analyze_text_features(text: str) -> Dict:
     }
 
 
-def get_ml_score(text: str) -> float:
+def get_ml_score(text: str, sender_info: Optional[Dict[str, str]] = None) -> float:
     """Get phishing probability from ML model"""
     if not MODELS_AVAILABLE:
         return 0.5
     try:
+        sender_context = ''
+        if sender_info:
+            sender_context = (
+                f"From: {sender_info.get('from', '')}\n"
+                f"Reply-To: {sender_info.get('reply_to', '')}\n"
+                f"Return-Path: {sender_info.get('return_path', '')}\n"
+                f"Subject: {sender_info.get('subject', '')}\n"
+            )
+
+        model_input = f"{sender_context}\nMessage: {text}" if sender_context.strip() else text
         result = zero_shot_classifier(
-            text[:512],
+            model_input[:512],
             candidate_labels=["phishing attempt", "legitimate message"],
             multi_label=False
         )
@@ -192,7 +318,7 @@ def get_ml_score(text: str) -> float:
 # MAIN CLASSIFICATION FUNCTION
 # ============================================================================
 
-def classify_message(text: str, verbose: bool = True) -> Dict:
+def classify_message(text: str, sender_info: Optional[Dict[str, str]] = None, verbose: bool = True) -> Dict:
     """Phishing detection using rules, text analysis, URL analysis, and ML."""
     if not text or len(text.strip()) < 10:
         return {
@@ -229,8 +355,8 @@ def classify_message(text: str, verbose: bool = True) -> Dict:
     text_analysis = analyze_text_features(text)
     text_score = text_analysis['score']
 
-    # Step 4: ML model
-    ml_score = get_ml_score(text) if MODELS_AVAILABLE else 0.5
+    # Step 4: ML model (includes sender context when available)
+    ml_score = get_ml_score(text, sender_info=sender_info) if MODELS_AVAILABLE else 0.5
 
     # Step 5: Combine scores (prioritize URL analysis if URLs found)
     if url_analysis['found_urls'] and url_score >= 0.5:
@@ -280,8 +406,23 @@ def classify_message(text: str, verbose: bool = True) -> Dict:
 def detect_phishing_from_file(filepath: str = 'Message.txt', verbose: bool = True) -> Dict:
     """Read message from file and classify"""
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
-            message = f.read().strip()
+        with open(filepath, 'rb') as f:
+            raw_bytes = f.read()
+
+        if not raw_bytes.strip():
+            return {'error': 'Message file is empty', 'filepath': filepath}
+
+        looks_like_eml = (
+            filepath.lower().endswith('.eml')
+            or b'\nMIME-Version:' in raw_bytes
+            or (b'\nContent-Type:' in raw_bytes and b'\nFrom:' in raw_bytes)
+        )
+
+        if looks_like_eml:
+            message, sender_info = parse_eml_input(raw_bytes)
+        else:
+            raw_content = raw_bytes.decode('utf-8', errors='replace')
+            message, sender_info = parse_email_input(raw_content)
 
         if not message:
             return {'error': 'Message file is empty', 'filepath': filepath}
@@ -289,8 +430,14 @@ def detect_phishing_from_file(filepath: str = 'Message.txt', verbose: bool = Tru
         if verbose:
             print(f"\nAnalyzing message from: {filepath}")
             print(f"Length: {len(message)} characters\n")
+            if sender_info.get('from'):
+                print(f"From: {sender_info['from']}")
+            if sender_info.get('subject'):
+                print(f"Subject: {sender_info['subject']}")
+            if sender_info.get('from') or sender_info.get('subject'):
+                print()
 
-        return classify_message(message, verbose=verbose)
+        return classify_message(message, sender_info=sender_info, verbose=verbose)
 
     except FileNotFoundError:
         return {
