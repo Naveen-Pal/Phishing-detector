@@ -7,6 +7,7 @@ A Python-based phishing detection system that identifies phishing emails and mes
 - **Rule-based detection** — instant, high-precision pattern matching for known phishing patterns
 - **Text feature analysis** — detects urgency language, credential requests, excessive punctuation, and generic greetings
 - **URL analysis** — extracts and classifies URLs found in messages using ML
+- **Sender/header analysis** — uses email metadata (`From`, `Reply-To`, `Return-Path`, `Subject`) as phishing signals
 - **Machine learning classification** — zero-shot classification via `facebook/bart-large-mnli` (no training required)
 - **Hybrid ensemble scoring** — combines all signals for a final phishing score and confidence level
 - **Detailed output** — per-component score breakdown with human-readable reasons
@@ -65,6 +66,13 @@ Phishing-detector/
    python phishing_detector.py               # uses message.txt by default
    python phishing_detector.py path/to/file  # custom file path
    ```
+
+3. You can also pass a `.eml` file directly:
+   ```bash
+   python phishing_detector.py suspicious_mail.eml
+   ```
+
+The detector will parse MIME email content (including multipart email), extract text body + sender headers, and include sender-domain mismatch signals in scoring.
 
 ### Example Outputs
 
