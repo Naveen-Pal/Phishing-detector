@@ -1,7 +1,7 @@
-# Review of bart-finetune.ipynb
+# Review of distilBERT.ipynb
 
 ## Overview
-The `bart-finetune.ipynb` notebook implements a multi-feature phishing detection system using DistilBERT, a lightweight transformer model. Originally titled "Bart finetune", it has evolved to use DistilBERT for classifying phishing messages across multiple dimensions.
+The `distilBERT.ipynb` notebook implements a multi-feature phishing detection system using DistilBERT, a lightweight transformer model distilled from BERT. The notebook provides a complete pipeline for training and inference of phishing message classification across multiple dimensions.
 
 ## Key Components
 
@@ -40,10 +40,17 @@ The `bart-finetune.ipynb` notebook implements a multi-feature phishing detection
 - **Metrics Function**: Computes accuracy and F1-score for each classification head
 - **Loss Computation**: Cross-entropy loss averaged across all 4 heads
 
-### 6. Additional Features (Planned/Incomplete)
-- Model saving/loading cells
-- Rule-based reasoning layer for phishing score computation
-- End-to-end inference function (`analyze_message`) for new message analysis
+### 6. Model Persistence
+- **Saving**: Model and tokenizer saved using `save_pretrained()` method
+- **Loading**: Model loaded from safetensors format for inference
+- **Updated Forward Method**: Enhanced forward pass for evaluation compatibility
+
+### 7. Inference and Analysis
+- **analyze_message() Function**: End-to-end phishing analysis for new messages
+- **Multi-Feature Prediction**: Provides detailed predictions for intent, manipulation, request type, and impersonation
+- **Confidence Scores**: Returns confidence levels for each prediction
+- **Rule-Based Scoring**: `compute_phishing_score()` combines features into final risk score (0-7 scale)
+- **Final Classification**: Determines if message is legitimate or phishing based on score
 
 ## Technical Details
 
@@ -81,9 +88,16 @@ def forward(self, input_ids, attention_mask=None, ...):
 - Model architecture: ✅ Complete
 - Data pipeline: ✅ Complete  
 - Training infrastructure: ✅ Complete
-- Training execution: 🔄 In progress (debugging phase)
-- Inference pipeline: 📝 Planned but not implemented
-- Model persistence: 📝 Planned but not implemented
+- Training execution: ✅ Complete (evaluation completed)
+- Model persistence: ✅ Complete (save/load with safetensors)
+- Inference pipeline: ✅ Complete (analyze_message function implemented)
+- Rule-based scoring: ✅ Complete (compute_phishing_score function)
 
 ## Purpose
-This notebook transforms a simple binary phishing classifier into a sophisticated multi-feature detection system that can identify specific phishing characteristics (manipulation tactics, requested information types, impersonation attempts) in addition to overall intent classification.
+This notebook provides a complete end-to-end phishing detection system using DistilBERT that can:
+- Train a multi-feature classifier on phishing message data
+- Save and load trained models for deployment
+- Analyze new messages with detailed feature predictions
+- Compute risk scores using rule-based reasoning
+- Provide confidence scores for all predictions
+- Support both email and SMS message analysis
