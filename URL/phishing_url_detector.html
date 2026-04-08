@@ -1,0 +1,280 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-mono, monospace); }
+  #app { padding: 1.5rem 0; }
+  .header { margin-bottom: 1.5rem; }
+  .header h1 { font-size: 18px; font-weight: 500; color: var(--color-text-primary); font-family: var(--font-sans); }
+  .header p { font-size: 13px; color: var(--color-text-secondary); margin-top: 4px; font-family: var(--font-sans); }
+  .input-row { display: flex; gap: 8px; margin-bottom: 1.5rem; }
+  .url-input { flex: 1; font-family: var(--font-mono); font-size: 13px; padding: 10px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); }
+  .url-input:focus { outline: none; border-color: var(--color-border-primary); }
+  .scan-btn { padding: 10px 20px; background: var(--color-text-primary); color: var(--color-background-primary); border: none; border-radius: var(--border-radius-md); font-family: var(--font-sans); font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; }
+  .scan-btn:hover { opacity: 0.85; }
+  .scan-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .examples { margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .ex-label { font-size: 11px; color: var(--color-text-tertiary); font-family: var(--font-sans); }
+  .ex-tag { font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; border-radius: 100px; border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); color: var(--color-text-secondary); cursor: pointer; }
+  .ex-tag:hover { border-color: var(--color-border-secondary); color: var(--color-text-primary); }
+  .result-card { border-radius: var(--border-radius-lg); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); overflow: hidden; }
+  .result-header { display: flex; align-items: center; gap: 12px; padding: 1rem 1.25rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .verdict-badge { font-size: 12px; font-weight: 500; font-family: var(--font-sans); padding: 4px 12px; border-radius: 100px; }
+  .badge-safe { background: #EAF3DE; color: #27500A; }
+  .badge-suspicious { background: #FAEEDA; color: #633806; }
+  .badge-phishing { background: #FCEBEB; color: #791F1F; }
+  .result-url { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .score-section { padding: 1rem 1.25rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .score-row { display: flex; align-items: center; gap: 12px; }
+  .score-num { font-size: 36px; font-weight: 500; font-family: var(--font-sans); line-height: 1; min-width: 56px; }
+  .score-safe { color: #3B6D11; }
+  .score-suspicious { color: #854F0B; }
+  .score-phishing { color: #A32D2D; }
+  .score-bar-wrap { flex: 1; }
+  .score-bar-track { height: 6px; background: var(--color-background-secondary); border-radius: 100px; overflow: hidden; margin-bottom: 6px; }
+  .score-bar-fill { height: 100%; border-radius: 100px; transition: width 0.6s cubic-bezier(.4,0,.2,1); }
+  .fill-safe { background: #639922; }
+  .fill-suspicious { background: #BA7517; }
+  .fill-phishing { background: #E24B4A; }
+  .score-label { font-size: 12px; color: var(--color-text-secondary); font-family: var(--font-sans); }
+  .features-section { padding: 1rem 1.25rem; }
+  .features-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); font-family: var(--font-sans); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .feature-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: var(--border-radius-md); background: var(--color-background-secondary); }
+  .fi-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .fi-text { font-size: 12px; font-family: var(--font-sans); line-height: 1.4; }
+  .fi-name { color: var(--color-text-secondary); }
+  .fi-val { font-weight: 500; }
+  .fi-flag { color: #A32D2D; }
+  .fi-ok { color: #3B6D11; }
+  .fi-warn { color: #854F0B; }
+  .empty-state { text-align: center; padding: 2.5rem 1rem; color: var(--color-text-tertiary); font-family: var(--font-sans); font-size: 13px; }
+  .empty-icon { font-size: 32px; margin-bottom: 8px; }
+  .history-section { margin-top: 1.5rem; }
+  .history-title { font-size: 12px; color: var(--color-text-tertiary); font-family: var(--font-sans); margin-bottom: 8px; }
+  .history-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary); cursor: pointer; }
+  .history-item:last-child { border-bottom: none; }
+  .history-item:hover .hi-url { color: var(--color-text-primary); }
+  .hi-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-safe { background: #639922; }
+  .dot-suspicious { background: #BA7517; }
+  .dot-phishing { background: #E24B4A; }
+  .hi-url { font-family: var(--font-mono); font-size: 11px; color: var(--color-text-secondary); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .hi-score { font-size: 11px; font-family: var(--font-sans); color: var(--color-text-tertiary); }
+</style>
+
+<div id="app">
+  <div class="header">
+    <h1>Phishing URL detector</h1>
+    <p>ML-style heuristic analysis — URL structure, domain patterns, suspicious indicators</p>
+  </div>
+
+  <div class="input-row">
+    <input class="url-input" id="urlInput" type="text" placeholder="https://example.com/path?query=..." autocomplete="off" spellcheck="false" />
+    <button class="scan-btn" id="scanBtn" onclick="analyze()">Scan URL</button>
+  </div>
+
+  <div class="examples">
+    <span class="ex-label">Try:</span>
+    <span class="ex-tag" onclick="loadEx(this)">https://google.com</span>
+    <span class="ex-tag" onclick="loadEx(this)">http://paypal-secure.login-verify.ru/account/login.php</span>
+    <span class="ex-tag" onclick="loadEx(this)">https://amazon.com.account-verify.tk/signin</span>
+    <span class="ex-tag" onclick="loadEx(this)">https://github.com/login</span>
+    <span class="ex-tag" onclick="loadEx(this)">http://192.168.1.1/bank/update?id=123&token=abc</span>
+  </div>
+
+  <div id="resultArea">
+    <div class="result-card">
+      <div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        Enter a URL above to analyze it for phishing indicators
+      </div>
+    </div>
+  </div>
+
+  <div class="history-section" id="historySection" style="display:none;">
+    <div class="history-title">Recent scans</div>
+    <div id="historyList"></div>
+  </div>
+</div>
+
+<script>
+const history = [];
+
+function loadEx(el) {
+  document.getElementById('urlInput').value = el.textContent;
+  analyze();
+}
+
+document.getElementById('urlInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') analyze();
+});
+
+function extractFeatures(url) {
+  let raw = url.trim();
+  if (!raw.startsWith('http')) raw = 'http://' + raw;
+
+  let parsed;
+  try { parsed = new URL(raw); } catch(e) { return null; }
+
+  const full = raw;
+  const host = parsed.hostname.toLowerCase();
+  const path = parsed.pathname + parsed.search;
+  const tld = host.split('.').slice(-1)[0];
+  const subdomains = host.split('.').length - 2;
+  const pathDepth = parsed.pathname.split('/').filter(Boolean).length;
+
+  const suspiciousWords = ['login','signin','secure','account','verify','update','confirm','banking','paypal','amazon','apple','microsoft','google','netflix','ebay','bank','password','credential','suspend','limited','unusual','activity','unlock','restore','validate','access'];
+  const suspiciousInHost = suspiciousWords.filter(w => host.includes(w));
+  const suspiciousInPath = suspiciousWords.filter(w => path.toLowerCase().includes(w));
+
+  const hasIP = /^\d{1,3}(\.\d{1,3}){3}$/.test(host);
+  const hasAtSign = full.includes('@');
+  const hasDoubleSlash = path.includes('//');
+  const dashCount = (host.match(/-/g) || []).length;
+  const dotCount = (host.match(/\g/g) || (host.match(/\./g) || [])).length;
+  const urlLen = full.length;
+  const hasHttp = parsed.protocol === 'http:';
+  const hasHttps = parsed.protocol === 'https:';
+  const suspiciousTLDs = ['tk','ml','ga','cf','gq','ru','cn','xyz','top','click','link','online','site','win','loan','racing','review','science','work','party','date','faith','men','bid','accountant','download','cricket'];
+  const isSuspiciousTLD = suspiciousTLDs.includes(tld);
+  const numParams = [...parsed.searchParams].length;
+  const hasRedirectParam = ['url','redirect','return','next','goto','link','ref'].some(p => parsed.searchParams.has(p));
+  const hasLongSubdomain = host.split('.').some(part => part.length > 20);
+  const hasBrandInSubdomain = ['paypal','apple','amazon','google','microsoft','netflix','bank','secure'].some(b => {
+    const parts = host.split('.');
+    return parts.length > 2 && parts.slice(0,-2).join('.').includes(b);
+  });
+  const hasEncoding = full.includes('%') && full.match(/%[0-9a-f]{2}/gi)?.length > 2;
+  const homoglyphs = /[^\x00-\x7F]/.test(host);
+  const hexInURL = /0x[0-9a-f]+/i.test(full);
+  const multipleSubdomains = subdomains > 2;
+
+  return {
+    url: raw, host, tld, subdomains, pathDepth,
+    urlLen, hasIP, hasAtSign, hasDoubleSlash,
+    dashCount, dotCount, hasHttp, hasHttps,
+    isSuspiciousTLD, suspiciousInHost, suspiciousInPath,
+    numParams, hasRedirectParam, hasLongSubdomain,
+    hasBrandInSubdomain, hasEncoding, homoglyphs,
+    hexInURL, multipleSubdomains
+  };
+}
+
+function scoreURL(f) {
+  let score = 0;
+  const flags = [];
+
+  if (f.hasIP) { score += 25; flags.push({ name: 'IP address as host', level: 'flag', icon: '⚠' }); }
+  else { flags.push({ name: 'Domain (not raw IP)', level: 'ok', icon: '✓' }); }
+
+  if (f.hasBrandInSubdomain) { score += 30; flags.push({ name: 'Brand name in subdomain', level: 'flag', icon: '⚠' }); }
+
+  if (f.isSuspiciousTLD) { score += 20; flags.push({ name: `Suspicious TLD (.${f.tld})`, level: 'flag', icon: '⚠' }); }
+  else { flags.push({ name: `TLD: .${f.tld}`, level: 'ok', icon: '✓' }); }
+
+  if (f.hasHttp) { score += 10; flags.push({ name: 'No HTTPS (plain HTTP)', level: 'warn', icon: '!' }); }
+  else { flags.push({ name: 'HTTPS encrypted', level: 'ok', icon: '✓' }); }
+
+  if (f.suspiciousInHost.length > 0) { score += Math.min(f.suspiciousInHost.length * 12, 30); flags.push({ name: `Phish keywords in host (${f.suspiciousInHost.slice(0,2).join(', ')})`, level: 'flag', icon: '⚠' }); }
+
+  if (f.suspiciousInPath.length > 1) { score += 10; flags.push({ name: `Phish keywords in path`, level: 'warn', icon: '!' }); }
+
+  if (f.hasAtSign) { score += 20; flags.push({ name: '@ sign in URL', level: 'flag', icon: '⚠' }); }
+
+  if (f.dashCount > 3) { score += 10; flags.push({ name: `${f.dashCount} dashes in domain`, level: 'warn', icon: '!' }); }
+  else if (f.dashCount > 0) { flags.push({ name: `${f.dashCount} dash(es) in domain`, level: 'ok', icon: '✓' }); }
+
+  if (f.multipleSubdomains) { score += 10; flags.push({ name: `${f.subdomains} subdomain levels`, level: 'warn', icon: '!' }); }
+
+  if (f.urlLen > 100) { score += 8; flags.push({ name: `Long URL (${f.urlLen} chars)`, level: 'warn', icon: '!' }); }
+  else { flags.push({ name: `URL length: ${f.urlLen} chars`, level: 'ok', icon: '✓' }); }
+
+  if (f.hasRedirectParam) { score += 12; flags.push({ name: 'Redirect parameter detected', level: 'flag', icon: '⚠' }); }
+
+  if (f.hasEncoding) { score += 8; flags.push({ name: 'Excessive URL encoding', level: 'warn', icon: '!' }); }
+
+  if (f.homoglyphs) { score += 25; flags.push({ name: 'Non-ASCII chars in domain', level: 'flag', icon: '⚠' }); }
+
+  if (f.hexInURL) { score += 15; flags.push({ name: 'Hex encoding in URL', level: 'flag', icon: '⚠' }); }
+
+  if (f.hasLongSubdomain) { score += 8; flags.push({ name: 'Unusually long subdomain', level: 'warn', icon: '!' }); }
+
+  score = Math.min(score, 100);
+
+  let verdict, cls;
+  if (score < 25) { verdict = 'Safe'; cls = 'safe'; }
+  else if (score < 55) { verdict = 'Suspicious'; cls = 'suspicious'; }
+  else { verdict = 'Phishing'; cls = 'phishing'; }
+
+  return { score, verdict, cls, flags };
+}
+
+function analyze() {
+  const raw = document.getElementById('urlInput').value.trim();
+  if (!raw) return;
+
+  const f = extractFeatures(raw);
+  if (!f) {
+    document.getElementById('resultArea').innerHTML = `<div class="result-card"><div class="empty-state"><div class="empty-icon">❌</div>Invalid URL format. Please enter a valid URL.</div></div>`;
+    return;
+  }
+
+  const { score, verdict, cls, flags } = scoreURL(f);
+
+  const featureHTML = flags.map(fl => `
+    <div class="feature-item">
+      <span class="fi-icon">${fl.icon}</span>
+      <div class="fi-text">
+        <div class="fi-val fi-${fl.level === 'flag' ? 'flag' : fl.level === 'warn' ? 'warn' : 'ok'}">${fl.name}</div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('resultArea').innerHTML = `
+    <div class="result-card">
+      <div class="result-header">
+        <span class="verdict-badge badge-${cls}">${verdict}</span>
+        <span class="result-url">${f.url}</span>
+      </div>
+      <div class="score-section">
+        <div class="score-row">
+          <div class="score-num score-${cls}">${score}</div>
+          <div class="score-bar-wrap">
+            <div class="score-bar-track">
+              <div class="score-bar-fill fill-${cls}" id="fillBar" style="width:0%"></div>
+            </div>
+            <div class="score-label">Risk score out of 100 — ${score < 25 ? 'No significant phishing signals detected' : score < 55 ? 'Some suspicious patterns found, proceed with caution' : 'High-risk URL — likely phishing attempt'}</div>
+          </div>
+        </div>
+      </div>
+      <div class="features-section">
+        <div class="features-title">Feature analysis (${flags.length} checks)</div>
+        <div class="feature-grid">${featureHTML}</div>
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => {
+    const bar = document.getElementById('fillBar');
+    if (bar) bar.style.width = score + '%';
+  }, 50);
+
+  history.unshift({ url: f.host + (f.url.length > 40 ? '...' : ''), score, cls, full: f.url });
+  if (history.length > 5) history.pop();
+  renderHistory();
+}
+
+function renderHistory() {
+  const sec = document.getElementById('historySection');
+  const list = document.getElementById('historyList');
+  if (history.length === 0) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  list.innerHTML = history.map((h, i) => `
+    <div class="history-item" onclick="document.getElementById('urlInput').value='${h.full.replace(/'/g,"\\'")}'; analyze();">
+      <div class="hi-dot dot-${h.cls}"></div>
+      <span class="hi-url">${h.url}</span>
+      <span class="hi-score">${h.score}/100</span>
+    </div>
+  `).join('');
+}
+</script>
