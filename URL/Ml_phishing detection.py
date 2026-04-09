@@ -1,6 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import os
+import re
 
 MODEL_ID  = "cybersectony/phishing-email-detection-distilbert_v2.4.1"
 MODEL_DIR = "./phishing_model"          # local save path
@@ -57,15 +58,22 @@ def predict(text):
 
 
 # --- Test it ---
+TEXT = """
+hi there this link can be dangerous: http://secure-paypa1-verify.com/login
+, this link may be secure https://google.com/
+"""
 
-phishing_email = """http://secure-paypa1-verify.com/login"""
+def extract_urls(text):
+    """Extract URLs from text using regex"""
+    url_pattern = r'https?://[^\s]+'
+    urls = re.findall(url_pattern, text)
+    return urls
 
-legit_email = """google.com"""
-
+links = extract_urls(TEXT)
 # this model works for text as well as link
-for label, text in [("Phishing email", phishing_email), ("Legit email", legit_email)]:
+for text in links:
     result = predict(text)
-    print(f"\n=== {label} ===")
+    print(f"\nLink: {text}")
     print(f"Verdict       : {result['verdict']}")
     print(f"Prediction    : {result['prediction']}")
     print(f"Confidence    : {result['confidence']}%")
