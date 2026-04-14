@@ -1,36 +1,36 @@
 # Phishing Detector
 
-A Python-based phishing detection system that identifies phishing emails and messages using a multi-layered approach combining rule-based detection, text feature analysis, URL analysis, and machine learning.
+A Python-based, multi-layered phishing detection system combining powerful fine-tuned linguistic analysis (DistilBERT Multi-task) and hybrid URL evaluation (Machine Learning + Deep Static Analysis).
 
 ## Features
 
-- **Rule-based detection** — instant, high-precision pattern matching for known phishing patterns
-- **Text feature analysis** — detects urgency language, credential requests, excessive punctuation, and generic greetings
-- **URL analysis** — extracts and classifies URLs found in messages using ML
-- **Sender/header analysis** — uses email metadata (`From`, `Reply-To`, `Return-Path`, `Subject`) as phishing signals
-- **Machine learning classification** — zero-shot classification via `facebook/bart-large-mnli` (no training required)
-- **Hybrid ensemble scoring** — combines all signals for a final phishing score and confidence level
-- **Detailed output** — per-component score breakdown with human-readable reasons
+- **Text Feature Analysis (DistilBERT Multi-Task)** — A memory-optimized, multi-head classifier predicting four dimensions of text communication:
+  - **Intent**: Normal, Suspicious, or Phishing
+  - **Request Type**: Credentials, Payment, Personal Info, or None
+  - **Manipulation**: Yes or No
+  - **Impersonation**: Yes or No
+- **URL Analysis (Machine Learning)** — Uses a fine-tuned sequence classification model to accurately score URLs for phishing probability.
+- **Deep Static URL Analysis** — A robust rule-based engine that extracts 14+ static heuristics (e.g., suspicious TLDs, IP as domain, hexadecimal obfuscation, redirection parameters, high entropy, double slash tricks).
+- **Hybrid Ensemble Scoring** — Intelligently integrates text insights and URL findings yielding a holistic verdict (`LEGITIMATE`, `SUSPICIOUS`, or `PHISHING`) and combined risk scores.
+- **Detailed Output** — Outputs component score breakdowns, predictions, and human-readable reasoning based on both ML classification and static indicators.
 
 ## Project Structure
 
-```
-Phishing-detector/
-├── phishing_detector.py          # Main application
-├── requirements.txt              # Python dependencies
-├── message.txt                   # Sample message for testing
-└── PRETRAINED_MODEL_APPROACH.md  # Technical deep-dive & model guide
+```text
+├── Merged/
+│   └── phishing_detector.py      # Main 
 ```
 
 ## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Language | Python 3.6+ |
+| Language | Python 3.8+ |
 | NLP Framework | Hugging Face Transformers ≥ 4.35.0 |
-| ML Model | `facebook/bart-large-mnli` (zero-shot) |
-| Deep Learning | PyTorch ≥ 2.0.0 |
-| HTTP Requests | requests ≥ 2.28.0 |
+| Text ML Model | `DistilBERT` (Fine-tuned, Multi-task) |
+| Deep Learning | PyTorch ≥ 2.0.0, safetensors |
+| Data Processing | `datasets`, `pandas`, `scikit-learn` |
+| Utilities | `urllib`, `re`, `math` |
 
 ## Installation
 
@@ -52,61 +52,39 @@ Phishing-detector/
    pip install -r requirements.txt
    ```
 
-> **Note:** On first run the `facebook/bart-large-mnli` model (~1.6 GB) will be downloaded automatically and cached in `~/.cache/huggingface/`.
-
 ## 🚀 Usage
 
-1. Put the message you want to analyze in `message.txt` (or any file of your choice):
-   ```bash
-   echo "URGENT: Your account has been suspended. Verify your password immediately at http://example.com/login" > message.txt
-   ```
+You can test the system using the `PhishingDetector` class inside `Merged/phishing_detector.py`. 
 
-2. Run the detector:
-   ```bash
-   python phishing_detector.py               # uses message.txt by default
-   python phishing_detector.py path/to/file  # custom file path
-   ```
+By default, executing the script runs the integrated demo block:
 
-3. You can also pass a `.eml` file directly:
-   ```bash
-   python phishing_detector.py suspicious_mail.eml
-   ```
-
-The detector will parse MIME email content (including multipart email), extract text body + sender headers, and include sender-domain mismatch signals in scoring.
-
-### Example Outputs
-
-**Phishing detected**
-```
-⚠️  PHISHING DETECTED ⚠️
-Label:      PHISHING
-Score:      1.000
-Confidence: HIGH
-Reason:     Phishing pattern detected: urgent_credential
+```bash
+python Merged/phishing_detector.py
 ```
 
-**Suspicious message**
-```
-⚡ SUSPICIOUS MESSAGE
-Label:      SUSPICIOUS
-Score:      0.650
-Confidence: MEDIUM
-Reason:     text: urgency language; ML model flagged as phishing
-```
+### Example Scanning Output
 
-**Benign message**
+```json
+{
+    "text_analysis": {
+        "verdict": "PHISHING",
+        "risk_score": 6.8,
+        "intent": "phishing",
+        "request_type": "credentials",
+        "manipulation": "yes",
+        "impersonation": "yes"
+    },
+    "url_analysis": {
+        "ml_prediction": {
+            "verdict": "PHISHING",
+            "phish_probability": 92.5,
+            "prediction_type": "phish_url"
+        },
+        "static_indicators": {
+            "suspicious_tld": "ru",
+            "brand_in_subdomain": true,
+            "suspicious_file_extension": "/verify"
+        }
+    }
+}
 ```
-✓ Message appears safe
-Label:      BENIGN
-Score:      0.150
-Confidence: HIGH
-Reason:     no major concerns
-```
-
-### Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| `0` | Benign or suspicious message |
-| `1` | Error occurred |
-| `2` | Phishing detected |
